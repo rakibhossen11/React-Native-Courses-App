@@ -86,7 +86,12 @@ const HomeScreen = ({navigation}) => {
         )
     }
   return (
-    <SafeAreaView>
+    <SafeAreaView 
+    style={{
+      backgroundColor: '#fff',
+      flex: 1,
+      paddingHorizontal: 20,
+    }}>
       <View 
       style={{
         backgroundColor: '#fff',
@@ -130,7 +135,7 @@ const HomeScreen = ({navigation}) => {
           </Text>
         </View>
       </View>
-      <View>
+      <View style={{flex: 1}}>
       <FlatList
           showsVerticalScrollIndicator={false}
           numColumns={2}

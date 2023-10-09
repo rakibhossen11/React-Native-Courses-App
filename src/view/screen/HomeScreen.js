@@ -1,17 +1,86 @@
 import React from "react";
-import { FlatList, ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, FlatList, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const courseContent = [
+  {
+    time: '5:35 mins',
+    title: 'Welcome to the Course',
+  },
+  {time: '7:35 mins', title: 'Design Thinking - Intro'},
+  {time: '10:35 mins', title: 'Design Thinking Process'},
+  {time: '5:35 mins', title: 'Customer Perspective'},
+];
+
+const courses = [
+  {
+    name: 'UX Design',
+    totalCourse: '25',
+    image: require('../../../assets/image1.png'),
+    price: '50',
+    star: '4.3',
+    students: '10',
+    courseContent,
+  },
+  {
+    name: 'Marketing',
+    totalCourse: '20',
+    image: require('../../../assets/image2.png'),
+    price: '50',
+    star: '4.1',
+    students: '55',
+    courseContent,
+  },
+  {
+    name: 'Photography',
+    totalCourse: '10',
+    image: require('../../../assets/image3.png'),
+    price: '50',
+    star: '4.3',
+    students: '10',
+    courseContent,
+  },
+  {
+    name: 'Business Photography',
+    totalCourse: '7',
+    image: require('../../../assets/image4.png'),
+    price: '50',
+    star: '4.2',
+    students: '35',
+    courseContent,
+  },
+];
 
 const HomeScreen = ({navigation}) => {
-    const CouseCard = ({course}) =>{
+    const CourseCard = ({course}) =>{
         return(
-            <TouchableOpacity>
+            <TouchableOpacity 
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('CourseScreen', {data: course})}
+            >
                 <ImageBackground 
-                source={course.image}>
-                    <Text>{course.name}</Text>
-                    <Text>{course.totalCourse + "Courses"}</Text>
+                source={course.image}
+                style={{
+                    marginVertical: 10,
+                    marginHorizontal: 5,
+                    borderRadius: 50,
+                    width: windowWidth / 2 - 30,
+                    height: windowHeight / 3,
+                    paddingTop: 25,
+                    paddingLeft: 20,
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                  }}>
+                    <Text style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              paddingBottom: 5,
+            }}>{course.name}</Text>
+                    <Text style={{color: '#8F95B2', fontWeight: '600'}}>{course.totalCourse + "Courses"}</Text>
                 </ImageBackground>
             </TouchableOpacity>
         )
@@ -19,11 +88,11 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       <View 
-    //   style={{
-    //     backgroundColor: '#fff',
-    //     flex: 1,
-    //     paddingHorizontal: 20,
-    //   }}
+      style={{
+        backgroundColor: '#fff',
+        flex: 1,
+        paddingHorizontal: 20,
+      }}
       >
         <Text style={{ fontSize: 28, fontWeight: "bold" }}>Hey Alex,</Text>
         <Text style={{ fontSize: 22, color: "#61688B", marginTop: 15 }}>
@@ -61,9 +130,13 @@ const HomeScreen = ({navigation}) => {
           </Text>
         </View>
       </View>
-      <View style={{flex: 1}}>
-        <FlatList 
-        renderItem={({item}) => <CouseCard course={item} /> }
+      <View>
+      <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={courses}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => <CourseCard course={item} />}
         />
       </View>
     </SafeAreaView>

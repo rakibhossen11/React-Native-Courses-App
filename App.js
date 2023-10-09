@@ -25,7 +25,7 @@ export default function App() {
           )
         }} />
         <Stack.Screen
-          name='Course Screen'
+          name='CourseScreen'
           component={CoursesScreen}
           options={({navigation}) =>({
             headerTransparent: true,
